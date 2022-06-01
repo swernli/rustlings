@@ -8,7 +8,13 @@
 
 fn array_and_vec() -> ([i32; 4], Vec<i32>) {
     let a = [10, 20, 30, 40]; // a plain array
-    let v = // TODO: declare your vector here with the macro for vectors
+    // let v = vec!(10, 20, 30, 40);
+
+    // let mut v = vec!();
+    // for i in (10..=40).step_by(10) {
+    //     v.push(i);
+    // }
+    let v = (10..=40).step_by(10).collect();
 
     (a, v)
 }
