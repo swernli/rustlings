@@ -6,14 +6,14 @@
 // this function to have.
 // Execute `rustlings hint errors1` for hints!
 
-// I AM NOT DONE
-
-pub fn generate_nametag_text(name: String) -> Option<String> {
-    if name.len() > 0 {
-        Some(format!("Hi! My name is {}", name))
+pub fn generate_nametag_text(name: String) -> Result<String, String> {
+    if name == "brad" {
+        Err("`name` can't be brad!".to_string())
+    } else if name.len() > 0 {
+        Ok(format!("Hi! My name is {}", name))
     } else {
         // Empty names aren't allowed.
-        None
+        Err("`name` was empty; it must be nonempty.".to_string())
     }
 }
 
@@ -28,7 +28,7 @@ mod tests {
     fn generates_nametag_text_for_a_nonempty_name() {
         assert_eq!(
             generate_nametag_text("Beyoncé".into()),
-            Some("Hi! My name is Beyoncé".into())
+            Ok("Hi! My name is Beyoncé".into())
         );
     }
 
@@ -38,6 +38,15 @@ mod tests {
             generate_nametag_text("".into()),
             // Don't change this line
             Err("`name` was empty; it must be nonempty.".into())
+        );
+    }
+
+    #[test]
+    fn explains_why_generating_nametag_text_fails_for_brad() {
+        assert_eq!(
+            generate_nametag_text("brad".into()),
+            // Don't change this line
+            Err("`name` can't be brad!".into())
         );
     }
 }
