@@ -11,10 +11,10 @@ use std::fmt;
 use std::num::ParseIntError;
 
 // TODO: update the return type of `main()` to make this compile.
-fn main() -> Result<(), ParseIntError> {
+fn main() -> Result<(), String> {
     let pretend_user_input = "42";
-    let x: i64 = pretend_user_input.parse()?;
-    println!("output={:?}", PositiveNonzeroInteger::new(x)?);
+    let x: i64 = pretend_user_input.parse().map_err(|e| format!("{:?}", e))?;
+    println!("output={:?}", PositiveNonzeroInteger::new(x).map_err(|e| format!("{:?}", e))?);
     Ok(())
 }
 
